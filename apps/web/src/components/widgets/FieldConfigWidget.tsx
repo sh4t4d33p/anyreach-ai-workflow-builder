@@ -434,6 +434,9 @@ export function FieldConfigWidget({
       let kind: "trigger" | "action" = componentType === "action" ? "action" : "trigger";
 
       // Stage 1: direct retrieve.
+      // Accept any OK response with a `data` field — even if configurableProps is
+      // absent (some triggers have no configurable props).  Only fall through to
+      // Stage 2 when the HTTP response is not OK (key doesn't exist / server error).
       for (const k of kindsTry) {
         console.log(`[FieldConfigWidget] Trying direct retrieve as ${k}:`, componentKey);
         const r = await fetch(`${pipedreamApiBase}${tryPath(k)}`);
@@ -442,7 +445,7 @@ export function FieldConfigWidget({
           error?: string;
         };
 
-        if (r.ok && j.data && Array.isArray(j.data.configurableProps)) {
+        if (r.ok && j.data) {
           data = j.data;
           matched = componentKey;
           kind = k;

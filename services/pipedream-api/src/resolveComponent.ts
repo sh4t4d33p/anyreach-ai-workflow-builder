@@ -111,20 +111,32 @@ function tokenize(s: string): string[] {
  *
  * Scoring tiers (descending):
  *  1. Exact match (after normalising _ to -): 1 000 000.
- *  2. One contains the other: 500 000.
+ *  2. Candidate contains hint (candidate is more specific): 500 000.
  *  3. Token overlap: sum of (token.length × 10) for shared tokens.
  *     Longer tokens score higher — "spreadsheet" beats "new".
+ *     Note: hint containing candidate (candidate is a prefix) falls here to
+ *     prevent shorter, less-specific keys from winning over better matches.
  *
  * @param hintKey       The original LLM-generated key.
  * @param candidateKey  A key from the Pipedream catalog.
  * @returns             Numeric score — higher is a better match.
  */
+/** @internal Exported only for unit tests. Not part of the public API. */
+export function _scoreMatchForTest(hintKey: string, candidateKey: string): number {
+  return scoreMatch(hintKey, candidateKey);
+}
+
 function scoreMatch(hintKey: string, candidateKey: string): number {
   const h = hintKey.toLowerCase().replace(/_/g, "-");
   const c = candidateKey.toLowerCase().replace(/_/g, "-");
 
   if (h === c) return 1_000_000;
-  if (c.includes(h) || h.includes(c)) return 500_000;
+  // Only award the containment bonus when the CANDIDATE contains the hint —
+  // meaning the candidate is more specific (longer) than the hint.
+  // When the hint contains the candidate (candidate is a shorter prefix of the
+  // hint), it is a different, less-specific component and should not get a
+  // bonus; fall through to token-overlap scoring instead.
+  if (c.includes(h)) return 500_000;
 
   const ht = tokenize(hintKey);
   const ck = candidateKey.toLowerCase();
