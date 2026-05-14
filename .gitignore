@@ -1,0 +1,29 @@
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+
+# ── Build outputs ─────────────────────────────────────────────────────────────
+dist/
+# Vite cache / pre-bundled deps
+.vite/
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# ── Environment / secrets ─────────────────────────────────────────────────────
+# Never commit real credentials — use .env.example as the template
+.env
+.env.local
+.env.*.local
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── OS artefacts ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Editor / IDE ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,511 @@
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.4;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+.wrap {
+  max-width: 64rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.h2 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem;
+  font-weight: 600;
+}
+
+.h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.small {
+  font-size: 0.8rem;
+}
+
+/* Phase 3 chat */
+.chat-shell {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+.chat-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.chat-title {
+  margin: 0;
+}
+
+.chat-sub {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.chat-head-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-secondary {
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #94a3b8;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.chat-error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.chat-layout {
+  display: grid;
+  grid-template-columns: 1fr 18rem;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+@media (max-width: 52rem) {
+  .chat-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 22rem;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 28rem;
+  padding: 0.5rem 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.chat-empty {
+  margin: 1rem 0;
+}
+
+.chat-bubble {
+  max-width: 95%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.chat-bubble--user {
+  align-self: flex-end;
+  background: #1d4ed8;
+  color: #f8fafc;
+}
+
+.chat-bubble--assistant {
+  align-self: flex-start;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.chat-bubble--pending {
+  opacity: 0.85;
+}
+
+.chat-role {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.2rem;
+  opacity: 0.85;
+}
+
+.chat-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-composer {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+  align-items: flex-end;
+}
+
+.chat-composer textarea {
+  flex: 1;
+  resize: vertical;
+  min-height: 4.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.btn-send {
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #1d4ed8;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-send:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.btn-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.chat-side {
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  background: #fafafa;
+  min-height: 10rem;
+}
+
+.draft-json {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  max-height: 22rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Dev smoke */
+.dev-smoke {
+  margin-top: 2rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.dev-smoke summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #475569;
+  padding: 0.35rem 0;
+}
+
+.widget-preview-json {
+  margin: 0.4rem 0 0;
+  padding: 0.45rem 0.5rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  max-height: 10rem;
+  overflow: auto;
+}
+
+.phase-bar {
+  margin: 0 0 0.75rem;
+}
+
+.phase-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #e0e7ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+}
+
+/* Finalized JSON block */
+.finalized-json-block {
+  margin-top: 0.75rem;
+  border: 1.5px solid #16a34a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.finalized-json-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.75rem;
+  background: #f0fdf4;
+  border-bottom: 1px solid #bbf7d0;
+  font-size: 0.85rem;
+  color: #15803d;
+}
+
+.finalized-json-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.finalized-json-actions .btn-secondary {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+}
+
+.finalized-json-body {
+  margin: 0;
+  padding: 0.75rem;
+  background: #0f172a;
+  color: #86efac;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  max-height: 28rem;
+  overflow: auto;
+  white-space: pre;
+}
+
+.widget-preview {
+  margin-top: 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid rgb(15 23 42 / 0.12);
+  font-size: 0.8rem;
+}
+
+.chat-bubble--user .widget-preview {
+  border-top-color: rgb(248 250 252 / 0.25);
+}
+
+.widget-preview-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: inherit;
+  opacity: 0.85;
+}
+
+.widget-preview-title {
+  font-weight: 500;
+}
+
+/* Phase 5 interactive widgets */
+.widget-live {
+  margin-top: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #c7d2fe;
+  background: #f8fafc;
+}
+
+.widget-live-head {
+  margin-bottom: 0.55rem;
+  font-size: 0.8rem;
+}
+
+.widget-stale {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.widget-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.widget-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.widget-field input,
+.widget-field select {
+  font: inherit;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.widget-field-remote {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.widget-field-remote-hint {
+  display: block;
+  font-weight: 400;
+}
+
+.widget-app-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.widget-app-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5.5rem;
+  padding: 0.4rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.widget-app-tile:hover {
+  border-color: #94a3b8;
+}
+
+.widget-app-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.widget-app-fallback {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e2e8f0;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.widget-app-name {
+  margin-top: 0.2rem;
+  line-height: 1.2;
+}
+
+.widget-err {
+  color: #b91c1c;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.widget-summary-block {
+  margin-bottom: 0.65rem;
+}
+
+.widget-h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.82rem;
+}
+
+.widget-snippet {
+  margin: 0;
+  font-size: 0.68rem;
+  max-height: 8rem;
+  overflow: auto;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 0.45rem;
+  border-radius: 6px;
+}
+
+.widget-step-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.78rem;
+}
+
+.widget-summary-actions {
+  margin-top: 0.5rem;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 1rem 0;
+}
+
+.row input {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.actions {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+button {
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #94a3b8;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+button:hover {
+  background: #e2e8f0;
+}
+
+.log {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  min-height: 8rem;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+}
+
+code {
+  background: #e2e8f0;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}

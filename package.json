@@ -1,0 +1,14 @@
+{
+  "name": "anyreach-ai-workflow-builder",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n pipedream,chat,web -c blue,magenta,green \"npm run dev -w services/pipedream-api\" \"npm run dev -w services/chat-api\" \"npm run dev -w apps/web\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
