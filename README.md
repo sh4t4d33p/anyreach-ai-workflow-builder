@@ -14,6 +14,7 @@ A chat-driven workflow authoring tool. Describe what you want to automate in pla
 - [Low-Level Architecture](#low-level-architecture)
 - [Key Architectural Decisions](#key-architectural-decisions)
 - [Bonus Features](#bonus-features)
+- [Known Limitations](#known-limitations)
 - [Happy Flow: Google Sheets → Slack](#happy-flow-google-sheets--slack)
 - [API Reference](#api-reference)
 
@@ -398,6 +399,29 @@ A comprehensive Vitest test suite covers all three packages:
 | `services/pipedream-api` | 3 | 21 | `resolveComponent` (`scoreMatch` scoring tiers, prefix-match regression), `parseLimit` (numeric edge cases), `healthRoutes` |
 
 The `chatRoutes` tests use Vitest's `async importOriginal` partial-mock pattern — `runChatTurn` is replaced with a spy while `parseChatRequestBody` runs real code, so request validation logic is exercised without an actual Gemini call.
+
+---
+
+## Known Limitations
+
+### Out of Scope (intentionally not built)
+
+| Item | Notes |
+|---|---|
+| **Headless runner** | The app produces a workflow JSON but nothing executes it. Execution was explicitly out of scope for this exercise. |
+| **Persistence** | No database. Refreshing the page wipes the current draft. |
+| **Multi-user / auth** | Single-session only — no accounts, no saved workflows, no access control. |
+| **Production Pipedream environment** | The `.env` sets `PIPEDREAM_PROJECT_ENVIRONMENT=development`. Deploying to production would require additional Pipedream project configuration. |
+
+### Rough Edges
+
+**LLM non-determinism** — Gemini occasionally skips a conversation phase or emits structurally valid but semantically wrong JSON (e.g. reusing a trigger component key for an action step). The response validator catches schema violations, but prompt compliance is not guaranteed on every turn.
+
+**Component key coverage** — The two-stage fuzzy resolver was tested against Google Sheets and Slack. Apps with small catalog footprints, inconsistent naming conventions, or very recent additions may still produce unresolvable keys if the scored candidates are all misses.
+
+**Remote prop dependencies** — Some Pipedream components declare props whose options depend on a prior prop's value (e.g. Worksheet options depend on the selected Spreadsheet). The field config widget renders props in order and fetches options for each, but it does not automatically re-fetch downstream prop options when an upstream value is changed after initial load. Users need to re-submit the form to get updated downstream options.
+
+**Single workflow per session** — There is no way to start a second workflow or switch between drafts without a full page refresh.
 
 ---
 

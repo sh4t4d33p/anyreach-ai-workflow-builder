@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "title": "Sync Google Sheet to Slack",
+  "trigger": {
+    "id": "google_sheet_trigger",
+    "summary": "New row added",
+    "app": "google_sheets",
+    "componentKey": "google_sheets-new-row-added",
+    "accountId": "apn_mnhLY6n",
+    "watchedDrive": "My Drive",
+    "sheetID": "1c9XW4zzH3HLDffn_W0XMPV0UC2kjXyXlS3juU0R85XM",
+    "worksheetIDs": "0"
+  },
+  "steps": [
+    {
+      "id": "slack_send_message",
+      "summary": "Send message to Slack",
+      "app": "slack",
+      "componentKey": "slack-send-message",
+      "accountId": "apn_pxh480j",
+      "channelType": "Channels",
+      "conversation": "C0B3F2UCNBD",
+      "text": "New row added"
+    }
+  ],
+  "conditions": [],
+  "policies": {
+    "retry": {
+      "maxAttempts": 3,
+      "backoffSeconds": 5
+    },
+    "onFailure": {
+      "strategy": "stop"
+    }
+  }
+}
